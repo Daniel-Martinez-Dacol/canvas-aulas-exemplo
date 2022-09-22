@@ -21,10 +21,32 @@ class Render {
         var vertexShader = Render.createShader(this.gl,this.gl.VERTEX_SHADER, vertexShaderSource);
         var fragmentShader = Render.createShader(this.gl,this.gl.FRAGMENT_SHADER, fragmentShaderSource);
         this.program = Render.createProgram(this.gl, vertexShader, fragmentShader);
+        this.positionAttributeLocation = this.gl.getAttribLocation(this.programa,"posicao");
+        this.positionBuffer = this.gl.createBuffer();
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.positionBuffer);
+
+
     }
     draw(){
         this.gl.clearColor(0,0,0,1);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+        this.gl.useProgram(this.programa);
+        var positions = [0,0,0,0,0.5,0,0.5,0,0];
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(positions), this.gl.STATIC_DRAW);
+        this.gl.enableVertexAttribArray(this.positionAttributeLocation);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.positionBuffer);
+
+        var size = 3;
+        var type = this.gl.FLOAT;
+        var normalize = false;
+        var stride = 0;
+        var offset = 0;
+        this.gl.vertexAttribPointer(this.positionAttributeLocation,size,type,normalize,stride,offset);
+
+        var primitiveType = this.gl.TRIANGLES;
+        var offset = 0;
+        var count = 3;
+        this.gl.drawArrays(promitiveType,offset,count);
     }
 
     static createShader(gl,type,source){
@@ -53,5 +75,7 @@ class Render {
         gl.deleteShader(program);
         
     }
+
+ 
 }
 
