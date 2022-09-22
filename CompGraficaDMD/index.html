@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>COMPUTAÇÃO GRAFICA MUITO LOUCO REEEEEE</title>
+    <title>COMPUTAÇÃO GRAFICA</title>
 </head>
 <body>
     <style> 
@@ -12,18 +12,23 @@
 
             background-color:black;          
         }
-        .coisaDaAula{
-            border-style: double;
-            border: black;
-        }
     </style>
-    <h1>HELLO</h1>
-    <div class="coisaDaAula">
         <canvas id="tela" width="640" height="480"></canvas>
+        <script id="meu-vertex-shader" type="hlsl">
+            attribute vec4 posicao;
+
+            void main(){
+                gl_Position = posicao;
+            }
+        </script>
+        <script id="meu-fragment-shader" type="hlsl">
+            precision mediumo float;
+
+            void main(){
+                gl_FragColor = vec4(1,0,0.5,1);
+            }
+        </script>
+        <script src="Render,js"></script>
         <script src="script.js"></script>
-        <div class="circulo">
-            <canvas id="circ" width="320" height="240"></canvas>
-        </div>
-    </div>
 </body>
 </html>
